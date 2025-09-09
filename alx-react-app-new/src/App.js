@@ -4,7 +4,7 @@ import UserProfile from './components/UserProfile';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import Counter from './components/Counter';
-import App from './components/App';
+
 
 
 function App() {
