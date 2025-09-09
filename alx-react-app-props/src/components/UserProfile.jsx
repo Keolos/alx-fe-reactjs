@@ -9,3 +9,17 @@ function UserProfile(props) {
 }
 
 export default UserProfile;
+
+function UserContext() {
+  return null;
+}
+
+function useContext() {
+  return null;
+}
+
+function react() {
+  return null;
+}
+
+export { UserContext, useContext, react };
