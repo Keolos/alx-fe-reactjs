@@ -3,12 +3,16 @@ import Header from './components/Header';
 import UserProfile from './components/UserProfile';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
+import Counter from './components/Counter';
+import App from './components/App';
+
 
 function App() {
   return (
     <div>
       <Header />
       <UserProfile name="Jane Doe" age="29" bio="Loves exploring cities and cultures." />
+      <Counter />
       <MainContent />
       <Footer />
     </div>
