@@ -2,6 +2,11 @@ import { useEffect } from 'react';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import useRecipeStore from './components/recipeStore';
+import Route from 'react-router-dom/Route';
+import Routes from 'react-router-dom/Routes';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
 
 function App() {
   const setRecipes = useRecipeStore(state => state.setRecipes);
@@ -22,15 +27,14 @@ function App() {
         createdAt: new Date().toLocaleDateString()
       }
     ];
-    
     // Only set sample recipes if no recipes exist
     const currentRecipes = useRecipeStore.getState().recipes;
     if (currentRecipes.length === 0) {
       setRecipes(sampleRecipes);
     }
-  }, [setRecipes]);
-
-  return (
+}, [setRecipes]);
+return (
+  <Router>
     <div style={{
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       backgroundColor: '#f8f9fa',
@@ -69,15 +73,20 @@ function App() {
         margin: '0 auto',
         padding: '0 20px'
       }}>
-        {/* Add Recipe Form */}
-        <section style={{ marginBottom: '40px' }}>
-          <AddRecipeForm />
-        </section>
-
-        {/* Recipe List */}
-        <section>
-          <RecipeList />
-        </section>
+        <Routes>
+          <Route path="/" element={
+            <>
+              {/* Add Recipe Form */}
+              <section style={{ marginBottom: '40px' }}>
+                <AddRecipeForm />
+              </section>
+              {/* Recipe List */}
+              <section>
+                <RecipeList />
+              </section>
+            </>
+          } />
+        </Routes>
       </main>
 
       {/* Footer */}
@@ -97,7 +106,8 @@ function App() {
         </p>
       </footer>
     </div>
-  );
+  </Router>
+);
 }
 
 export default App;
