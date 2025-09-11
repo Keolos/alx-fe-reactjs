@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import useRecipeStore from '../store/recipeStore';
+import useRecipeStore from '../components/recipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
 
@@ -29,7 +29,7 @@ const RecipeDetails = () => {
   // Handle edit modal
   const handleEditClick = () => {
     setShowEditModal(true);
-  };
+  }
 
   const handleEditCancel = () => {
     setShowEditModal(false);
@@ -237,155 +237,193 @@ const RecipeDetails = () => {
                 backgroundColor: '#f8f9fa',
                 borderRadius: '10px'
               }}>
-                                <div style={{ textAlign: 'center' }}>
-                                  <div style={{ fontSize: '1.5rem', marginBottom: '5px' }}>🆔</div>
-                                  <div style={{ fontSize: '0.9rem', color: '#666' }}>Recipe ID</div>
-                                  <div style={{ fontSize: '1.1rem', fontWeight: '500', color: '#333' }}>{recipe.id}</div>
-                                </div>
-                                {/* You can add more stats here if needed */}
-                              </div>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.9rem', color: '#666' }}>Recipe ID</div>
+                  <div style={{ fontWeight: 'bold', color: '#333' }}>{recipe.id}</div>
+                </div>
                 
-                              {/* Ingredients Section */}
-                              <div>
-                                <h3 style={{
-                                  fontSize: '1.4rem',
-                                  color: '#333',
-                                  marginBottom: '15px',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  gap: '10px'
-                                }}>
-                                  🥕 Ingredients
-                                </h3>
-                                <ul style={{
-                                  backgroundColor: '#f8f9fa',
-                                  padding: '20px',
-                                  borderRadius: '10px',
-                                  borderLeft: '4px solid #28a745',
-                                  listStyle: 'disc inside',
-                                  margin: 0
-                                }}>
-                                  {recipe.ingredients && recipe.ingredients.map((ingredient, idx) => (
-                                    <li key={idx} style={{ fontSize: '1.1rem', color: '#555', marginBottom: '8px' }}>
-                                      {ingredient}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                
-                              {/* Instructions Section */}
-                              <div>
-                                <h3 style={{
-                                  fontSize: '1.4rem',
-                                  color: '#333',
-                                  marginBottom: '15px',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  gap: '10px'
-                                }}>
-                                  🍳 Instructions
-                                </h3>
-                                <ol style={{
-                                  backgroundColor: '#f8f9fa',
-                                  padding: '20px',
-                                  borderRadius: '10px',
-                                  borderLeft: '4px solid #ffc107',
-                                  listStyle: 'decimal inside',
-                                  margin: 0
-                                }}>
-                                  {recipe.instructions && recipe.instructions.map((step, idx) => (
-                                    <li key={idx} style={{ fontSize: '1.1rem', color: '#555', marginBottom: '12px' }}>
-                                      {step}
-                                    </li>
-                                  ))}
-                                </ol>
-                              </div>
-                
-                              {/* Recipe Image */}
-                              <div>
-                                <h3 style={{
-                                  fontSize: '1.4rem',
-                                  color: '#333',
-                                  marginBottom: '15px',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  gap: '10px'
-                                }}>
-                                  📷 Recipe Image
-                                </h3>
-                                {recipe.image && !imageError ? (
-                                  <img
-                                    src={recipe.image}
-                                    alt={recipe.title}
-                                    style={{
-                                      width: '100%',
-                                      maxWidth: '400px',
-                                      borderRadius: '10px',
-                                      boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-                                    }}
-                                    onError={() => setImageError(true)}
-                                  />
-                                ) : (
-                                  <div style={{
-                                    width: '100%',
-                                    maxWidth: '400px',
-                                    height: '220px',
-                                    backgroundColor: '#e9ecef',
-                                    borderRadius: '10px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: '#aaa',
-                                    fontSize: '2rem'
-                                  }}>
-                                    {imageError ? 'Image not available' : 'No image provided'}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                
-                            {/* Edit & Delete Buttons */}
-                            <div style={{
-                              display: 'flex',
-                              gap: '15px',
-                              marginTop: '40px',
-                              justifyContent: 'flex-end'
-                            }}>
-                              <button
-                                onClick={handleEditClick}
-                                style={{
-                                  padding: '10px 22px',
-                                  backgroundColor: '#ffc107',
-                                  color: '#333',
-                                  border: 'none',
-                                  borderRadius: '6px',
-                                  fontWeight: '500',
-                                  fontSize: '1rem',
-                                  cursor: 'pointer',
-                                  boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-                                  transition: 'background-color 0.2s'
-                                }}
-                                onMouseEnter={e => e.target.style.backgroundColor = '#e0a800'}
-                                onMouseLeave={e => e.target.style.backgroundColor = '#ffc107'}
-                              >
-                                ✏️ Edit Recipe
-                              </button>
-                              <DeleteRecipeButton recipeId={recipe.id} />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                
-                      {/* Edit Modal */}
-                      {showEditModal && (
-                        <EditRecipeForm
-                          recipe={recipe}
-                          onCancel={handleEditCancel}
-                        />
-                      )}
+                {recipe.preparationTime && (
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '1.5rem', marginBottom: '5px' }}>⏱️</div>
+                    <div style={{ fontSize: '0.9rem', color: '#666' }}>Prep Time</div>
+                    <div style={{ fontWeight: 'bold', color: '#333' }}>{recipe.preparationTime} min</div>
+                  </div>
+                )}
+
+                {recipe.difficulty && (
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '1.5rem', marginBottom: '5px' }}>📊</div>
+                    <div style={{ fontSize: '0.9rem', color: '#666' }}>Difficulty</div>
+                    <div style={{ 
+                      fontWeight: 'bold', 
+                      color: recipe.difficulty === 'easy' ? '#28a745' : 
+                             recipe.difficulty === 'medium' ? '#ffc107' : '#dc3545',
+                      textTransform: 'capitalize'
+                    }}>
+                      {recipe.difficulty}
                     </div>
-                  );
-                };
-                
-                export default RecipeDetails;
-                
+                  </div>
+                )}
+
+                {recipe.category && (
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '1.5rem', marginBottom: '5px' }}>🍽️</div>
+                    <div style={{ fontSize: '0.9rem', color: '#666' }}>Category</div>
+                    <div style={{ 
+                      fontWeight: 'bold', 
+                      color: '#17a2b8',
+                      textTransform: 'capitalize'
+                    }}>
+                      {recipe.category}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Ingredients Section */}
+              {recipe.ingredients && recipe.ingredients.length > 0 && (
+                <div>
+                  <h3 style={{
+                    fontSize: '1.4rem',
+                    color: '#333',
+                    marginBottom: '15px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}>
+                    🥘 Ingredients ({recipe.ingredients.length})
+                  </h3>
+                  <div style={{
+                    backgroundColor: '#f8f9fa',
+                    padding: '20px',
+                    borderRadius: '10px',
+                    borderLeft: '4px solid #28a745'
+                  }}>
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                      gap: '8px'
+                    }}>
+                      {recipe.ingredients.map((ingredient, index) => (
+                        <div key={index} style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '10px',
+                          padding: '8px 0',
+                          fontSize: '1rem',
+                          color: '#555'
+                        }}>
+                          <span style={{
+                            backgroundColor: '#28a745',
+                            color: 'white',
+                            borderRadius: '50%',
+                            width: '24px',
+                            height: '24px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '0.8rem',
+                            fontWeight: 'bold',
+                            flexShrink: 0
+                          }}>
+                            {index + 1}
+                          </span>
+                          {ingredient}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Tags Section */}
+              {recipe.tags && recipe.tags.length > 0 && (
+                <div>
+                  <h3 style={{
+                    fontSize: '1.4rem',
+                    color: '#333',
+                    marginBottom: '15px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                  }}>
+                    🏷️ Tags
+                  </h3>
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '10px'
+                  }}>
+                    {recipe.tags.map((tag, index) => (
+                      <span key={index} style={{
+                        backgroundColor: '#007bff',
+                        color: 'white',
+                        padding: '6px 12px',
+                        borderRadius: '20px',
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        display: 'inline-block'
+                      }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div style={{
+              backgroundColor: '#f8f9fa',
+              padding: '25px',
+              borderTop: '1px solid #e9ecef',
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '15px',
+              flexWrap: 'wrap'
+            }}>
+              <button
+                onClick={handleEditClick}
+                style={{
+                  backgroundColor: '#28a745',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '12px 24px',
+                  fontSize: '1rem',
+                  fontWeight: '500',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'background-color 0.2s ease'
+                }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#218838'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#28a745'}
+              >
+                ✏️ Edit Recipe
+              </button>
+
+              <DeleteRecipeButton 
+                recipeId={recipe.id} 
+                recipeName={recipe.title}
+                size="large"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Edit Modal */}
+        {showEditModal && (
+          <EditRecipeForm 
+            recipeId={parseInt(id)}
+            onCancel={handleEditCancel}
+            isModal={true}
+          />
+        )}
+      </div>
+    );
+  </div>);}
+  ;
+
+export default RecipeDetails;

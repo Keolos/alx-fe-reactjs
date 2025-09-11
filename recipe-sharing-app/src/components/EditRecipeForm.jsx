@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useRecipeStore from '../store/recipeStore';
+import useRecipeStore from '../components/recipeStore';
 
 const EditRecipeForm = ({ recipeId, onCancel, isModal = false }) => {
   const navigate = useNavigate();
