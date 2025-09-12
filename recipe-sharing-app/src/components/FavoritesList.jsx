@@ -274,8 +274,14 @@ const FavoritesList = ({ isCompact = false, maxDisplay = null }) => {
                     {recipe.updatedAt && (
                       <div>✏️ Updated: {recipe.updatedAt}</div>)
                     }
-                  </div>
+                  </div>                </div>
+              </div>
             </div>
-        </div>
-     </div>
-           ) </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default FavoritesList;
