@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchUsers } from "../services/githubService";
+import { fetchUserData, searchUsers } from "../services/githubService";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Search = () => {
@@ -13,6 +13,7 @@ const Search = () => {
   const [hasMore, setHasMore] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
 
+  // --- Advanced Search (Task 2) ---
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,6 +42,25 @@ const Search = () => {
     }
   };
 
+  // --- Quick Fetch (Task 1 requirement: fetchUserData) ---
+  const handleSingleUserFetch = async () => {
+    if (!username) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const user = await fetchUserData(username);
+      setUsers([user]); // wrap in array so UI still works
+      setHasMore(false);
+    } catch (err) {
+      setError("Looks like we can’t find the user");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // --- Infinite Scroll ---
   const fetchMoreUsers = async () => {
     try {
       const nextPage = page + 1;
@@ -96,9 +116,19 @@ const Search = () => {
           disabled={loading}
           className="col-span-1 md:col-span-3 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition disabled:opacity-50"
         >
-          {loading ? "Searching..." : "Search"}
+          {loading ? "Searching..." : "Advanced Search"}
         </button>
       </form>
+
+      {/* Quick Fetch Button (uses fetchUserData) */}
+      <button
+        type="button"
+        onClick={handleSingleUserFetch}
+        disabled={loading || !username}
+        className="w-full mb-6 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition disabled:opacity-50"
+      >
+        {loading ? "Fetching..." : "Quick Fetch by Username"}
+      </button>
 
       {/* Loading State */}
       {loading && <p className="text-center text-gray-600">Loading...</p>}
@@ -122,7 +152,7 @@ const Search = () => {
           <div className="space-y-4">
             {users.map((user) => (
               <div
-                key={user.id}
+                key={user.id || user.login}
                 className="flex items-center p-4 bg-gray-50 rounded-lg shadow-sm"
               >
                 <img
