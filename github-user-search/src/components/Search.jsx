@@ -75,21 +75,40 @@ const Search = () => {
       )}
 
       {/* User Data Display */}
-      {userData && (
+      {userData && !loading && !error && (
         <div className="mt-6 p-4 bg-gray-50 rounded-md">
           <div className="text-center">
+            {/* User Avatar */}
             <img
               src={userData.avatar_url}
               alt={`${userData.login}'s avatar`}
               className="w-20 h-20 rounded-full mx-auto mb-4"
             />
+
+            {/* User Name */}
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               {userData.name || userData.login}
             </h3>
+
+            {/* Username */}
             <p className="text-gray-600 mb-2">@{userData.login}</p>
+
+            {/* Bio */}
             {userData.bio && (
               <p className="text-sm text-gray-700 mb-4">{userData.bio}</p>
             )}
+
+            {/* Extra Details */}
+            <div className="text-sm text-gray-600 mb-4">
+              {userData.location && <p className="mb-1">📍 {userData.location}</p>}
+              {userData.company && <p className="mb-1">🏢 {userData.company}</p>}
+              <div className="flex justify-center space-x-4 mt-2">
+                <span>👥 {userData.followers} followers</span>
+                <span>📚 {userData.public_repos} repos</span>
+              </div>
+            </div>
+
+            {/* GitHub Profile Link */}
             <a
               href={userData.html_url}
               target="_blank"
