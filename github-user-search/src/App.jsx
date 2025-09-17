@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <div className="min-h-screen bg-gray-100 py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          <h1 className="text-4xl font-bold text-red-500">
             GitHub User Search Application
           </h1>
           <Search />
