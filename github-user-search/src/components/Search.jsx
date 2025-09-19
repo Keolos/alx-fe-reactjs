@@ -13,7 +13,7 @@ const Search = () => {
   const [hasMore, setHasMore] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
 
-  // --- Advanced Search (Task 2) ---
+  // --- Advanced Search ---
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,14 +35,14 @@ const Search = () => {
       setUsers(results.items);
       setTotalCount(results.total_count);
       setHasMore(results.total_count > results.items.length);
-    } catch (err) {
+    } catch {
       setError("Looks like we can’t find any matching users");
     } finally {
       setLoading(false);
     }
   };
 
-  // --- Quick Fetch (Task 1 requirement: fetchUserData) ---
+  // --- Quick Fetch by Username ---
   const handleSingleUserFetch = async () => {
     if (!username) return;
 
@@ -53,7 +53,7 @@ const Search = () => {
       const user = await fetchUserData(username);
       setUsers([user]); // wrap in array so UI still works
       setHasMore(false);
-    } catch (err) {
+    } catch {
       setError("Looks like we can’t find the user");
     } finally {
       setLoading(false);
@@ -74,7 +74,7 @@ const Search = () => {
       setUsers((prev) => [...prev, ...results.items]);
       setPage(nextPage);
       setHasMore(users.length + results.items.length < totalCount);
-    } catch (err) {
+    } catch {
       setError("Could not load more users");
     }
   };
@@ -120,7 +120,7 @@ const Search = () => {
         </button>
       </form>
 
-      {/* Quick Fetch Button (uses fetchUserData) */}
+      {/* Quick Fetch Button */}
       <button
         type="button"
         onClick={handleSingleUserFetch}
@@ -160,7 +160,6 @@ const Search = () => {
                   alt={user.login}
                   className="w-16 h-16 rounded-full mr-4"
                 />
-
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-800">
                     {user.login}
@@ -178,13 +177,6 @@ const Search = () => {
             ))}
           </div>
         </InfiniteScroll>
-      )}
-
-      {/* No Results */}
-      {!loading && !error && users.length === 0 && (
-        <p className="text-center text-gray-500">
-          No results yet. Try searching.
-        </p>
       )}
     </div>
   );
