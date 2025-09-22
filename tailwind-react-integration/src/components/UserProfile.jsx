@@ -9,18 +9,22 @@ function UserProfile() {
                     rounded-lg 
                     shadow-lg 
                     text-center
-                    hover:scale-105 
-                    transition-transform duration-300">
+                    hover:shadow-xl
+                    transition-shadow duration-300">
 
       {/* User Image */}
       <img
         src="https://via.placeholder.com/150"
         alt="User"
-        className="w-24 h-24 sm:w-24 md:w-36 h-24 sm:h-24 md:h-36 rounded-full mx-auto"
+        className="w-24 h-24 sm:w-24 md:w-36 h-24 sm:h-24 md:h-36 rounded-full mx-auto
+                   hover:scale-110 
+                   transition-transform duration-300 ease-in-out"
       />
 
       {/* User Name */}
-      <h1 className="text-lg sm:text-lg md:text-xl text-blue-800 my-2 sm:my-3 md:my-4 font-semibold">
+      <h1 className="text-lg sm:text-lg md:text-xl text-blue-800 my-2 sm:my-3 md:my-4 font-semibold
+                     hover:text-blue-500 
+                     transition-colors duration-300">
         John Doe
       </h1>
 
