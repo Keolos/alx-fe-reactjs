@@ -16,7 +16,7 @@ function UserProfile() {
       <img
         src="https://via.placeholder.com/150"
         alt="User"
-        className="w-24 h-24 sm:w-24 md:w-36 h-24 sm:h-24 md:h-36 rounded-full mx-auto
+        className="w-24 h-24 sm:w-24 md:w-36 sm:h-24 md:h-36 rounded-full mx-auto
                    hover:scale-110 
                    transition-transform duration-300 ease-in-out"
       />
