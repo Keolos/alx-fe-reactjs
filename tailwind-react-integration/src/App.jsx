@@ -4,15 +4,16 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './index.css' // Tailwind CSS import
+import UserProfile from './components/UserProfile'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6 text-center">
-
+    <div className="min-h-screen flex flex-col items-center justify-start bg-gray-100 p-6">
+      
       {/* Logos */}
-      <div className="flex gap-8 mb-8">
+      <div className="flex gap-8 mt-8 mb-8">
         <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
           <img src={viteLogo} className="w-24 h-24 animate-bounce" alt="Vite logo" />
         </a>
@@ -22,7 +23,7 @@ function App() {
       </div>
 
       {/* Heading */}
-      <h1 className="text-5xl font-extrabold mb-8 text-blue-600">
+      <h1 className="text-5xl font-extrabold mb-8 text-blue-600 text-center">
         Vite + React + Tailwind
       </h1>
 
@@ -34,13 +35,16 @@ function App() {
         >
           count is {count}
         </button>
-        <p className="mt-4 text-gray-500">
+        <p className="mt-4 text-gray-500 text-center">
           Edit <code className="bg-gray-100 px-1 rounded">src/App.jsx</code> and save to test HMR
         </p>
       </div>
 
+      {/* User Profile Component */}
+      <UserProfile />
+
       {/* Footer Text */}
-      <p className="text-gray-500">
+      <p className="text-gray-500 mt-8 text-center">
         Click on the Vite and React logos to learn more
       </p>
     </div>
