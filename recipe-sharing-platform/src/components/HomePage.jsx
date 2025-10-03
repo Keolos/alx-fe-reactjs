@@ -40,6 +40,15 @@ const HomePage = () => {
                     >
                     View Recipe →
                 </Link>
+            <div className="text-center mb-6">
+                <Link
+                    to="/add-recipe"
+                    className="inline-block bg-green-500 text-white px-5 py-2 rounded-lg font-medium hover:bg-green-600 transition duration-300"
+                >
+                    ➕ Add New Recipe
+                </Link>
+            </div>
+
 
             </div>
           </div>
