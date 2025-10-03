@@ -7,7 +7,7 @@ const AddRecipeForm = () => {
 
   const [errors, setErrors] = useState({}); // field-level errors
 
-  // Validation function
+  // Validation
   const validate = () => {
     const newErrors = {};
 
@@ -29,13 +29,12 @@ const AddRecipeForm = () => {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // valid if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!validate()) return; // stop if validation fails
+    if (!validate()) return;
 
     const newRecipe = {
       id: Date.now(),
@@ -46,7 +45,6 @@ const AddRecipeForm = () => {
 
     console.log("✅ Recipe Submitted:", newRecipe);
 
-    // Clear form
     setTitle("");
     setIngredients("");
     setSteps("");
@@ -54,14 +52,14 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
+    <div className="container mx-auto px-4 py-10 md:px-8">
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">
         Add a New Recipe 🍲
       </h1>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-xl p-6 max-w-lg mx-auto"
+        className="bg-white shadow-lg rounded-xl p-6 max-w-lg md:max-w-2xl mx-auto"
       >
         {/* Title */}
         <div className="mb-6">
@@ -93,7 +91,7 @@ const AddRecipeForm = () => {
             placeholder="Enter ingredients, each on a new line"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className={`w-full border rounded-lg px-4 py-2 h-32 focus:outline-none focus:ring-2 ${
+            className={`w-full border rounded-lg px-4 py-2 h-32 md:h-40 focus:outline-none focus:ring-2 ${
               errors.ingredients
                 ? "border-red-400 focus:ring-red-300"
                 : "border-gray-300 focus:ring-blue-400"
@@ -113,7 +111,7 @@ const AddRecipeForm = () => {
             placeholder="Enter preparation steps, each on a new line"
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className={`w-full border rounded-lg px-4 py-2 h-40 focus:outline-none focus:ring-2 ${
+            className={`w-full border rounded-lg px-4 py-2 h-40 md:h-52 focus:outline-none focus:ring-2 ${
               errors.steps
                 ? "border-red-400 focus:ring-red-300"
                 : "border-gray-300 focus:ring-blue-400"
@@ -127,7 +125,7 @@ const AddRecipeForm = () => {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition duration-300"
+          className="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition duration-300 md:py-4"
         >
           Submit Recipe
         </button>
