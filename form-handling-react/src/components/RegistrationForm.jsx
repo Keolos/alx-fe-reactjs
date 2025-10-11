@@ -1,94 +1,79 @@
 import React, { useState } from "react";
 
-function RegistrationForm() {
+const RegistrationForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
-  const validate = () => {
-    const newErrors = {};
-    if (!username.trim()) newErrors.username = "Username is required";
-    if (!email.trim()) newErrors.email = "Email is required";
-    if (!password.trim()) newErrors.password = "Password is required";
-    return newErrors;
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validate();
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      setSuccess("");
+    // Basic validation
+    if (!username) {
+      setError("Username is required");
+      return;
+    }
+    if (!email) {
+      setError("Email is required");
+      return;
+    }
+    if (!password) {
+      setError("Password is required");
       return;
     }
 
-    setErrors({});
-    setSuccess("Form submitted successfully!");
-    console.log("Submitted data:", { username, email, password });
+    setError("");
+    setSuccess(`User ${username} registered successfully!`);
+
+    // Reset form fields
+    setUsername("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "40px auto" }}>
-      <h2>User Registration</h2>
+    <div style={{ maxWidth: "400px", margin: "2rem auto" }}>
+      <h2>User Registration (Controlled Components)</h2>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: "1rem" }}>
           <label>Username:</label>
           <input
             type="text"
-            name="username"
-            value={username}  
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{ width: "100%", padding: "8px" }}
+            placeholder="Enter username"
           />
-          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
         </div>
 
-        <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: "1rem" }}>
           <label>Email:</label>
           <input
             type="email"
-            name="email"
-            value={email}  
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: "8px" }}
+            placeholder="Enter email"
           />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
         </div>
 
-        <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: "1rem" }}>
           <label>Password:</label>
           <input
             type="password"
-            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: "8px" }}
+            placeholder="Enter password"
           />
-          {errors.password && (
-            <p style={{ color: "red" }}>{errors.password}</p>
-          )}
         </div>
 
-        <button
-          type="submit"
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Register
-        </button>
-
-        {success && <p style={{ color: "green" }}>{success}</p>}
+        <button type="submit">Register</button>
       </form>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {success && <p style={{ color: "green" }}>{success}</p>}
     </div>
   );
-}
+};
 
 export default RegistrationForm;
