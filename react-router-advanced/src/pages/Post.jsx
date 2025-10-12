@@ -6,8 +6,8 @@ const Post = () => {
 
   return (
     <div>
-      <h2>Blog Post #{postId}</h2>
-      <p>This is the content for post ID: {postId}</p>
+      <h2>📝 Post Page</h2>
+      <p>Displaying details for Post ID: {postId}</p>
     </div>
   );
 };

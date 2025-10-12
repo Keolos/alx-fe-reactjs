@@ -3,8 +3,8 @@ import React from "react";
 const About = () => {
   return (
     <div>
-      <h2>About Page</h2>
-      <p>This is the About page of our React Router Advanced project.</p>
+      <h2>ℹ️ About Page</h2>
+      <p>This is a demo app showcasing advanced React Router features.</p>
     </div>
   );
 };
