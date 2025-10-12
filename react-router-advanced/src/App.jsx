@@ -6,11 +6,11 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
-
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Profile from "./components/Profile";
 import Post from "./pages/Post";
+import BlogPost from "./pages/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
           <Link to="/about">About</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/post/123">Dynamic Post</Link>
+          <Link to="/blog/45">Dynamic Blog</Link>
 
           <button
             onClick={() => setIsAuthenticated(!isAuthenticated)}
@@ -60,8 +61,9 @@ function App() {
             }
           />
 
-          {/* Dynamic Route for Blog Post */}
+          {/* Dynamic Routes */}
           <Route path="/post/:postId" element={<Post />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
 
           {/* Catch-all route */}
           <Route path="*" element={<Navigate to="/" />} />
